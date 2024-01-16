@@ -1,15 +1,17 @@
 #include<stdio.h>
-#include<stdlib.h>
+#include <stdlib.h>
 typedef struct node
 {
   int data;
   struct node *link;
 }node;
 
+node *head=NULL;
+
 node* create_node(int a)
 {
   node *temp;
-  temp=malloc(sizeof(node));
+  temp = malloc(sizeof(node));
   temp->data=a;
   temp->link=NULL;
   return temp;
@@ -21,44 +23,69 @@ void display(node *head)
   ptr=head;
   while(ptr!=NULL)
     {
-      printf("%d",ptr->data);
+      printf("%d ",ptr->data);
       ptr=ptr->link;
     }
+    free(ptr);
 }
 
-int count_node()
+void count(node *head)
 {
-  node *ptr;
-  ptr=head;
-  int count=0;
-  while(ptr!=NULL)
+    int count=0;
+    node *temp;
+    temp=head;
+    while(temp!=NULL)
     {
-      ptr=ptr->link;
-      count++;
+        temp=temp->link;
+        count++;
     }
-  return count;
+    printf("\nTotal number of nodes is %d.",count);
 }
 
-void insert_at_beginning(int x)
+void insert_at_begn(int x)
 {
-  node *temp;
-  temp=malloc(sizeof(node));
-  if(temp!=null) //because malloc only can return NULL or valid address
-  {
-    temp->data=x;
+    node *temp;
+    temp = create_node(x);
     temp->link=head;
     head=temp;
-  }
 }
 
-
-void insertion_at_last()
+void insert_at_last(int x)
 {
-  
+    node *tp;
+    tp=create_node(x);
+    if(head==NULL)
+    {
+        head = tp;
+        return;
+    }
+    node *last=head;
+    while(last->link!=NULL)
+    last=last->link;
+    last->link=tp;
 }
 
+void print_last_node_data()
+{
+    if(head==NULL)
+      return;
+    node *temp=head;
+    while(temp->link!=0)
+    {
+        temp=temp->link;
+    }
+    printf("\n%d",temp->data);
+}
 int main ()
 {
-  node *head;
-  
+  head = create_node(4);
+  head->link= create_node(5);
+  head->link->link=create_node(6);
+  insert_at_begn(3);
+  insert_at_last(7);
+  display(head);
+  count(head);
+  printf("\n%d",head->data);
+  print_last_node_data();
+  return 0;
 }
