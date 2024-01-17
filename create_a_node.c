@@ -76,6 +76,18 @@ void print_last_node_data()
     }
     printf("\n%d",temp->data);
 }
+
+int program_to_search_key(int x)
+{
+    node *temp=head;
+    while(temp!=NULL)
+    {
+        if(temp->data==x)
+        return 1;
+        temp=temp->link;
+    }return 0;
+}
+
 int main ()
 {
   head = create_node(4);
